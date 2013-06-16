@@ -1,0 +1,14 @@
+/*/out/*
+target/
+*.iml
+.idea/
+/play-2.1.1
+
+logs
+project/project
+project/target
+target
+tmp
+dist
+.cache
+.history
