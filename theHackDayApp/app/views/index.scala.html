@@ -1,7 +1,24 @@
-@(message: String)
+@(title: String)
 
-@main("Welcome to Play 2.1") {
-    
-    @play20.welcome(message)
+@main(title) {
+
+
+<!--A mess of content Lists and Div and Span-->
+<h3>Lists</h3>
+<div id="container">
+    <div id="menu">
+        <b>Menu</b><br />
+        I am the menu
+    </div>
+    <div id="content">
+
+        <h4>Reminders List</h4>
+        <ul>
+            <li>Recycle the bins and people</li>
+            <li>Find <span>Mugabe hideout</span></li>
+        </ul>
+    </div>
+</div>
+
     
 }
