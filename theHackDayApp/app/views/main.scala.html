@@ -10,9 +10,15 @@
     </head>
 
     <body>
-        <header>
-            <a href="@routes.Application.index">@title</a>
+        <header class="banner">
+            @title
         </header>
+
+        <div class="siteNavigation">
+            <a href="@routes.Application.index">Space Mish Home</a>
+            <a href="@routes.Application.dashboard">Dashboard</a>
+            <a href="@routes.Application.index">About</a>
+        </div>
 
         <section>
             @content

@@ -1,22 +1,24 @@
-html, body {
+html, body, p {
     padding: 0;
     margin: 0;
     font-family: Helvetica, Arial;
     color: #3A4244;
 }
 
-header {
+header.banner{
     padding: 10px 30px;
     background: #CAE7EC;
-    font-size: 24px;
+    font: bold 24px Verdana;
 }
 
-header a {
-    color: #1A1E20;
+div.siteNavigation {
+    padding: 6px;
+    background-color: #98CBFF;
     text-decoration: none;
+    font-size: 18px;
 }
 
-section {
+section.unused{
     padding: 10px 30px;
 }
 
