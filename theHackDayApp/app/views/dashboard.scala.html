@@ -1,23 +1,28 @@
-@(title: String)
+@(title: String, names: List[String])
 
 @main(title) {
 
 <div id="container">
 
-    <div id="menu" style="background-color:#FFD700;height:200px;width:100px;float:left;">
-        Left Panel
+    <div id="menu">
+        Left Panel - menu
     </div>
 
-    <div id="content" style="background-color:#EEEEEE;height:200px;width:400px;float:left;">
-        Centre Panel
+    <div id="content">
+        Centre Panel - content
     </div>
 
-    <div id="control" style="background-color:#EED7EE;height:200px;width:400px;float:left;">
-        Right Panel
+    <div id="crew">
+        <h2>Crew Members</h2>
+        <ul id="members">
+            @for(name <- names) {
+            <li>@name - cadet</li>
+            }
+        </ul>
     </div>
 
-    <div id="footer" style="background-color:#FFA500;clear:both;text-align:left;">
-        Bottom Panel
+    <div id="footer">
+        Bottom Panel -footer
     </div>
 
 </div>

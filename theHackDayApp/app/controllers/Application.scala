@@ -9,11 +9,12 @@ object Application extends Controller {
     Ok(views.html.index("Space Mish"))
   }
 
-  def dashboard =
-  {
-    Action {
-      Ok(views.html.dashboard("Dashboard"))
-    }
+  def dashboard = Action {
+    Ok(views.html.dashboard("Dashboard", List("Rich","Ben","Noin")))
+  }
+
+  def reflect = Action {
+    request => Ok("Got a request again: " + request)
   }
 
   // TODO:
