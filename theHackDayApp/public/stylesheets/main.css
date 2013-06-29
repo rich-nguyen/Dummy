@@ -1,23 +1,55 @@
 html, body, p {
     padding: 0;
-    margin: 0;
+    margin: 12;
     font-family: Helvetica, Arial;
-    color: #3A4244;
+    background: #AAA2A4;
 }
 
 header.banner{
-    padding: 10px 30px;
+    margin: 6px 0px 6px;
+    padding: 12px 0px 12px;
     background: #CAE7EC;
     font: bold 24px Verdana;
 }
 
 div.siteNavigation {
-    padding: 6px;
+    margin: 6px 0px 6px;
+    padding: 6px 0px 6px;
     background-color: #98CBFF;
     text-decoration: none;
     font-size: 18px;
 }
 
+#menu {
+    margin: 6px 6px 6px 0px;
+    background:#FFD70F;
+    height:200px;
+    width:100px;
+    float:left;
+}
+
+#content {
+    margin: 6px 6px 6px 6px;
+    background:#EEEEEE;
+    height:200px;
+    width:400px;
+    float:left;
+}
+
+#control {
+    margin: 6px 6px 6px 6px;
+    background:#EED7EE;
+    height:200px;
+    width:400px;
+    float:left;
+}
+
+#footer {
+    margin: 6px 0px 12px 0px;
+    background:#FFA500;
+    clear:both;
+    text-align:left;
+}
 section.unused{
     padding: 10px 30px;
 }
