@@ -10,7 +10,7 @@ object Application extends Controller {
   }
 
   def dashboard = Action {
-    Ok(views.html.dashboard("Dashboard"))
+    Ok(views.html.dashboard("Dashboard", List("Rich","Ben","Noin")))
   }
 
   def reflect = Action {

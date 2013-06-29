@@ -1,4 +1,4 @@
-@(title: String)
+@(title: String, names: List[String])
 
 @main(title) {
 
@@ -13,7 +13,12 @@
     </div>
 
     <div id="crew">
-        Right Panel - crew
+        <h2>Crew Members</h2>
+        <ul id="members">
+            @for(name <- names) {
+            <li>@name - cadet</li>
+            }
+        </ul>
     </div>
 
     <div id="footer">
