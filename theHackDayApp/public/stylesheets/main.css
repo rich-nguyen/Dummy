@@ -1,57 +1,58 @@
-html, body, p {
-    padding: 0;
-    margin: 12;
+body, p {
+    padding: 0px;
+    margin: 6px;
     font-family: Helvetica, Arial;
     background: #AAA2A4;
 }
 
 header.banner{
     margin: 6px 0px 6px;
-    padding: 12px 0px 12px;
+    padding: 12px 12px 12px;
     background: #CAE7EC;
     font: bold 24px Verdana;
 }
 
 div.siteNavigation {
-    margin: 6px 0px 6px;
-    padding: 6px 0px 6px;
+    margin: 6px 0px 0px;
+    padding: 6px 12px 6px;
     background-color: #98CBFF;
     text-decoration: none;
     font-size: 18px;
 }
 
 #menu {
-    margin: 6px 6px 6px 0px;
+    margin: 6px 0px;
     background:#FFD70F;
+    padding: 6px 12px 6px;
     height:200px;
     width:100px;
     float:left;
 }
 
 #content {
-    margin: 6px 6px 6px 6px;
+    margin: 6px 0px 6px 6px;
     background:#EEEEEE;
+    padding: 6px 12px 6px;
     height:200px;
     width:400px;
     float:left;
 }
 
-#control {
-    margin: 6px 6px 6px 6px;
+#crew {
+    margin: 6px 0px 6px 6px;
     background:#EED7EE;
+    padding: 6px 12px 6px;
     height:200px;
     width:400px;
     float:left;
 }
 
 #footer {
-    margin: 6px 0px 12px 0px;
+    margin: 6px 0px 6px 0px;
     background:#FFA500;
+    padding: 6px 12px 6px;
     clear:both;
     text-align:left;
-}
-section.unused{
-    padding: 10px 30px;
 }
 
 ul {
