@@ -1,15 +1,24 @@
-@(title: String)
+@(title: String, loginForm: Form[(String,String)])
 
 @main(title) {
 
-<div>
+<div id="menu">
     <a href="@routes.Application.reflect">Request-and-Reflect</a>
+
+    @helper.form(action = routes.Application.login, 'id -> "hiForm") {
+
+        @helper.inputText(loginForm("name"))
+
+        @helper.inputText(loginForm("password"))
+
+        <button type="submit" value="Log In">Log in </button>
+    }
 </div>
 
 <!--A mess of content Lists and Div and Span-->
 <h3>Lists</h3>
-<div id="container">
-    <div id="menu">
+<div>
+    <div>
         <b>Menu</b><br />
         I am the menu
     </div>
