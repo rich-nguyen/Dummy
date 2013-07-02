@@ -4,11 +4,13 @@ Dummy
 This is solely for playing with new toys!
 
 The original aim is that it should hold a usable project, composed of the following:
-* IntelliJ IDEA project
-* Various Git-based experiments
-* Scala stuff
+* IntelliJ IDEA projects, via gen-idea.
+* Various Git-based trials
+* Scala stuff, 2.10 sugar
 * An sbt script
 * Some sh scripts for common things I used to do in windows.
+* A miniApps project for trying out scala and useful tools. 
+	*OptaFeedMonkey - Curls a URL endpoint to a new file every 5 minutes
 
 Should be usable from any mac/linux system.
 
