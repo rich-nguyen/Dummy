@@ -48,7 +48,7 @@ def main(args: Array[String])
           dir.mkdir();
 
           println("making new file at " + homeDir + "/Desktop/cricketfeed/" + newFileName)
-          printToFile(new java.io.File(homeDir, "/Desktop/cricketfeed/"+ newFileName + ".txt"))(p =>
+          printToFile(new java.io.File(homeDir, "/Desktop/cricketfeed/"+ newFileName + ".xml"))(p =>
           {
             for ( line <- data.getLines())
               {
