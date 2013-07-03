@@ -22,7 +22,13 @@ private def printToFile(f: java.io.File)(op: java.io.PrintWriter => Unit)
 // in separate files every 5 minutes.
 def main(args: Array[String])
 {
-    println("OptaFeedMonkey")
+    println("--- OptaFeedMonkey ---")
+
+    if (args.length < 1)
+    {
+      println("No URL specified")
+      exit(0);
+    }
 
     while(true)
     {
