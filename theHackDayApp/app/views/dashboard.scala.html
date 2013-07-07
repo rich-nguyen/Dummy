@@ -1,11 +1,15 @@
-@(title: String, names: List[String])
+@(title: String, names: List[String], spaceship: model.Spaceship)
 
 @main(title) {
 
 <div id="container">
 
     <div id="menu">
-        Left Panel - menu
+        <h3>@spaceship.name</h3>
+        <ul class="menu__list">
+            <li>Distance travelled: @spaceship.distanceTravelled</li>
+            <li>Fuel remaining: @spaceship.fuelRemaining</li>
+        </ul>
     </div>
 
     <div id="content">
@@ -22,7 +26,7 @@
     </div>
 
     <div id="footer">
-        Bottom Panel -footer
+        <h3>@spaceship.name Feed</h3>
     </div>
 
 </div>
