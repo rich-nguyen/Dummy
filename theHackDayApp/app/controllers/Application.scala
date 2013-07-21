@@ -29,10 +29,6 @@ object Application extends Controller {
     )
   }
 
-  // TODO:
-  // Show and set persistent data.
-  // Who you know and how, ie. invite-only users. OpenID for now.
-
   def newTask = TODO
 
   def deleteTask(id: Long) = TODO
