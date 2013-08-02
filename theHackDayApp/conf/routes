@@ -7,7 +7,7 @@ GET     /                           controllers.Application.index
 
 # Main dashboard for space vehicle
 GET     /dashboard                  controllers.Application.dashboard
-POST    /tasks                      controllers.Application.newTask
+POST    /newTask                    controllers.Application.newTask
 POST    /tasks/:id/delete           controllers.Application.deleteTask(id: Long)
 
 GET     /reflect                    controllers.Application.reflect

@@ -1,4 +1,4 @@
-@(title: String, names: List[String], spaceship: model.Spaceship)
+@(title: String, names: List[String], spaceship: model.Spaceship, taskForm: Form[(String,String)])
 
 @main(title) {
 
@@ -14,6 +14,13 @@
 
     <div id="content">
         Centre Panel - content
+        <div class="content__add-fuel">
+            @helper.form(action = routes.Application.newTask) {
+            @helper.inputText(taskForm("task"))
+            @helper.inputText(taskForm("value"))
+            <button type="submit" value="Add Fuel">Add Fuel</button>
+            }
+        </div>
     </div>
 
     <div id="crew">
