@@ -3,6 +3,7 @@ package controllers
 import play.api.mvc._
 import play.api.data._
 import play.api.data.Forms._
+import model.{Spaceship, CrewMember}
 
 object Application extends Controller {
   
@@ -10,9 +11,9 @@ object Application extends Controller {
     Ok(views.html.index("Space Mish",loginForm))
   }
 
-  def dashboard = Action {
+  def dashboard = Action { implicit request =>
     // Should stop this soon when authentication is in place.
-    Ok(views.html.dashboard("Dashboard", List("Rich","Ben","Noin"), spaceship, taskForm))
+    Ok(views.html.dashboard("Dashboard", spaceship, taskForm))
   }
 
   def reflect = Action {
@@ -25,8 +26,7 @@ object Application extends Controller {
       formError => BadRequest("error logging in" + formError.errors.mkString(" ")),
       {
         case (username, _) => Ok(views.html.dashboard(  "Dashboard",
-                                                        username :: List("Rich","Ben","Noin"),
-                                                        spaceship,
+                                                        spaceship.addMember(CrewMember(username)),
                                                         taskForm))
       }
     )
@@ -40,6 +40,11 @@ object Application extends Controller {
           spaceship = spaceship.addFuel(value.toFloat)
           Redirect(routes.Application.dashboard).flashing(
             "shipInfo" -> "Fuel added."
+          )
+        }
+        case (unknown: String, _) => {
+          Redirect(routes.Application.dashboard).flashing(
+            "shipInfo" -> s"Unknown task $unknown"
           )
         }
       }
@@ -62,5 +67,5 @@ object Application extends Controller {
     )
   )
 
-  var spaceship = model.Spaceship("Firefly", 0.0f, 50.0f,Nil)
+  var spaceship = Spaceship("Firefly", 0.0f, 50.0f,List(CrewMember("Rich"),CrewMember("Ben"),CrewMember("Noin")))
 }
