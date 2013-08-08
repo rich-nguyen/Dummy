@@ -90,3 +90,7 @@ ul {
     padding-left: 20px;
 }
 
+.dashboard-panels__container {
+    overflow: auto;
+}
+
