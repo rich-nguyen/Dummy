@@ -12,3 +12,5 @@ tmp
 dist
 .cache
 .history
+
+node_modules
