@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# Default Interaction Prompt Statement, PS1
+export CLICOLOR=1
+export LSCOLORS=ExFxBxDxCxegedabagacad
+
+# Git branch
+# Remember stdin, stdout, stderr are assigned to 0,1,2. Default: keyboard, screen,
+# error messages output to the screen.
+parse_git_branch() {
+    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+}
+
+# Non-printing escape sequences have to be enclosed in \[\033[ and \]. For colour escape
+# sequences, they should also be followed by a lowercase m.
+export PS1="\[\033[36m\]\u\[\033[m\]@\[\033[32m\]\h:\[\033[33;1m\]\w\[\033[32m\]\$(parse_git_branch)\[\033[33;1m\]:\[\033[m\]"
+
+# Aliases
+alias ls='ls -GFh'
+
+# Paths
+export PATH="$PATH"
+
+# Ruby
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
