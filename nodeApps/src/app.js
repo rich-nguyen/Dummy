@@ -1,5 +1,6 @@
 /*
-* Module dependencies. Run "npm install" on this directory to get a node_modules dir,
+* Module dependencies.
+* Run "npm install" on this directory to get a node_modules dir,
 * then "node app.js" to run the app.
 */
 
