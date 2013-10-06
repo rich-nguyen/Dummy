@@ -132,15 +132,6 @@ class Empty extends TweetSet {
 
 class NonEmpty(elem: Tweet, left: TweetSet, right: TweetSet) extends TweetSet {
 
-  /*def mostRetweeted: Tweet = {
-    var mostRetweeted = elem
-    this.foreach( tweet =>
-      if (tweet.retweets > mostRetweeted.retweets)
-        mostRetweeted = tweet
-    )
-    mostRetweeted
-  }*/
-
   def mostRetweeted: Tweet = {
     val trendier = filter(_.retweets > elem.retweets)
 
@@ -157,7 +148,7 @@ class NonEmpty(elem: Tweet, left: TweetSet, right: TweetSet) extends TweetSet {
   def filterAcc(p: Tweet => Boolean, acc: TweetSet): TweetSet = {
 
     if (p(elem)) {
-      new NonEmpty(elem, left.filter(p), right.filter(p))
+      new NonEmpty(elem, left.filterAcc(p, acc), right.filter(p))
     } else {
       val filteredLeft = left.filterAcc(p, acc)
       right.filterAcc(p, filteredLeft)
