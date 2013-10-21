@@ -153,10 +153,16 @@ object Huffman {
    *  - try to find sensible parameter names for `xxx`, `yyy` and `zzz`.
    */
   def until(finish: List[CodeTree] => Boolean, combiner: List[CodeTree] => List[CodeTree])(trees: List[CodeTree]): List[CodeTree] = {
-    trees match {
-      case a :: b :: tail => until(finish, combiner)(combiner(trees))
-      case a :: Nil => trees
-      case Nil => trees
+    if (singleton(trees))
+    {
+      trees
+    }
+    else{
+      trees match {
+        case a :: b :: tail => until(finish, combiner)(combiner(trees))
+        case a :: Nil => trees
+        case Nil => trees
+      }
     }
   }
 
