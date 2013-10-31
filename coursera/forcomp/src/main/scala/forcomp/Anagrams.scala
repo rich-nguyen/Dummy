@@ -39,7 +39,14 @@ object Anagrams {
 
   /** Converts a sentence into its character occurrence list. */
   def sentenceOccurrences(s: Sentence): Occurrences = {
-    wordOccurrences(s.reduceLeft( (a:String,b:String) => a + b ))
+    if ( s.isEmpty)
+    {
+      List()
+    }
+    else
+    {
+      wordOccurrences(s.reduceLeft( (a:String,b:String) => a + b ))
+    }
   }
 
   /** The `dictionaryByOccurrences` is a `Map` from different occurrences to a sequence of all
@@ -58,7 +65,7 @@ object Anagrams {
    *
    */
   lazy val dictionaryByOccurrences: Map[Occurrences, List[Word]] = {
-    dictionary.groupBy(wordOccurrences _)
+    dictionary.groupBy(wordOccurrences _).withDefaultValue(Nil)
   }
 
   /** Returns all the anagrams of a given word. */
@@ -88,7 +95,36 @@ object Anagrams {
    *  Note that the order of the occurrence list subsets does not matter -- the subsets
    *  in the example above could have been displayed in some other order.
    */
-  def combinations(occurrences: Occurrences): List[Occurrences] = ???
+  /*def combinations(occurrences: Occurrences): List[Occurrences] = {
+    var combos : Set[Occurrences] = Set(Nil)
+    for {
+      letter <- occurrences
+      count <- 1 to letter._2
+    } yield {
+      combos.map( (oldEntry:Occurrences) =>
+        combos = combos ++ Set(extendOccurrences(oldEntry, letter._1))
+      )
+    }
+    combos.toList
+  }*/
+
+  def combinations(occurrences: Occurrences): List[Occurrences] = {
+    val letters:List[Char]  =for {
+      letter <- occurrences
+      count <- 1 to letter._2
+    } yield {
+      letter._1
+    }
+
+    letters.foldRight(Set[Occurrences](Nil)) ( (char, output) => {
+      output ++ output.map( element => extendOccurrences(element, char))
+    }).toList
+  }
+
+  def extendOccurrences(occurrence: Occurrences, letter: Char) : Occurrences = {
+    val frequencies = occurrence.toMap.withDefaultValue(0)
+    frequencies.updated(letter,frequencies(letter)+1).toList.sortBy(_._1)
+  }
 
   /** Subtracts occurrence list `y` from occurrence list `x`.
    * 
@@ -100,7 +136,16 @@ object Anagrams {
    *  Note: the resulting value is an occurrence - meaning it is sorted
    *  and has no zero-entries.
    */
-  def subtract(x: Occurrences, y: Occurrences): Occurrences = ???
+  def subtract(x: Occurrences, y: Occurrences): Occurrences = {
+    val yMap = y.toMap.withDefaultValue(0)
+    x.foldRight(Map[Char,Int]()) ( (a, partialMap) => {
+      val yCount = yMap(a._1)
+      (a._2 - yCount) match {
+        case count if count > 0 => partialMap.updated(a._1, count)
+        case _ => partialMap.-(a._1)
+      }
+    }).toList.sortBy(_._1)
+  }
 
   /** Returns a list of all anagram sentences of the given sentence.
    *  
@@ -142,6 +187,46 @@ object Anagrams {
    *
    *  Note: There is only one anagram of an empty sentence.
    */
-  def sentenceAnagrams(sentence: Sentence): List[Sentence] = ???
+  def sentenceAnagrams(sentence: Sentence): List[Sentence] = {
+    if (sentence.isEmpty) {
+      List(Nil)
+    }
+    else
+    {
+      val occurrences: Occurrences = sentenceOccurrences(sentence)
+      anagramHelper(occurrences, List(Nil))
+    }
+  }
 
+  def anagramHelper(occurrences: Occurrences, listSoFar:List[Sentence]): List[Sentence] = {
+    if (occurrences.isEmpty)
+    {
+      listSoFar
+    }
+    else
+    {
+      // Powerset of frequencies. Some of these subsets could be words.
+      val validOccurrences: List[Occurrences] = combinations(occurrences).filter(isAWord(_))
+
+      if ( validOccurrences.isEmpty)
+      {
+        Nil
+      }
+      else
+      {
+        validOccurrences.flatMap( (possibleWord:Occurrences) => {
+          val anagrams: List[Word] = dictionaryByOccurrences(possibleWord)
+          val newSentences: List[Sentence] = for { sentence <- listSoFar
+                                                   anagram <- anagrams }
+                                              yield { anagram :: sentence }
+          val remainingOccurrences = subtract(occurrences, possibleWord)
+          anagramHelper(remainingOccurrences, newSentences)
+        })
+      }
+    }
+  }
+
+  def isAWord(occurrences:Occurrences):Boolean = {
+    !dictionaryByOccurrences(occurrences).isEmpty
+  }
 }
