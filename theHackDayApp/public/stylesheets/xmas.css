@@ -1,7 +1,6 @@
 body {
     background: #F890DA;
-    font-family: "Goudy Old Style", Garamond, "Big Caslon", "Times New Roman", serif;
-    padding: 20px 50px 0 50px;
+    padding: 20px 10px 0 10px;
     background-image: -webkit-gradient(linear, 0 0, 100% 100%, color-stop(.25, rgba(255, 255, 255, .2)),
                                                                color-stop(.25, transparent),
                                                                color-stop(.5, transparent),
@@ -12,7 +11,7 @@ body {
 }
 
 .banner {
-    font-size: 70px;
+    font-size: 40px;
     font-style: normal;
     font-weight: normal;
     color: #B93556;
@@ -21,7 +20,7 @@ body {
     -webkit-transform: rotate(-0.05turn);
     font-family: 'Lily Script One', cursive;
     float:right;
-    width: 65%;
+    width: 70%;
     margin-top: 50px;
     margin-bottom: 45px;
 }
@@ -29,7 +28,7 @@ body {
 .at {
     font-family: 'Lily Script One', cursive;
     color: #34875C;
-    font-size: 40px;
+    font-size: 28px;
     font-weight: lighter;
 }
 
@@ -40,7 +39,7 @@ body {
 
 .invite {
     clear: both;
-    font-size: 34px;
+    font-size: 26px;
     text-align: justify;
     font-weight: bold;
     font-family: 'Bree Serif', serif;
@@ -55,7 +54,7 @@ body {
 
 .hype {
     clear: both;
-    font-size: 20px;
+    font-size: 12px;
     text-align: center;
     font-weight: bold;
     font-family: 'Bree Serif', serif;
@@ -76,25 +75,32 @@ body {
     text-align: center;
     color: #B5070A;
     font-family: 'Bree Serif', serif;
-    font-size: 30px;
+    font-size: 22px;
     margin-bottom: 30px;
 }
 
 .details__date .details__item{
     position: relative;
-    top: 0%;
+    top: 15%;
     font-family: 'Limelight', cursive;
-    font-size: 40px;
+    font-size: 28px;
 }
 
 .theatre {
+    font-family: 'Limelight', cursive;
+    color: #B5070A;
+    margin-top: 20px;
+    margin-bottom: 0;
+}
+
+.time {
     font-family: 'Limelight', cursive;
     color: #B5070A;
 }
 
 .details__location {
     font-family: 'Limelight', cursive;
-    font-size: 40px;
+    font-size: 26px;
 }
 
 .details__time {
@@ -112,8 +118,8 @@ body {
 }
 
 .twelve-point-star {
-   height: 180px;
-   width: 180px;
+   height: 120px;
+   width: 120px;
    background: orange;
    position: absolute;
    left:  80px;
@@ -121,8 +127,8 @@ body {
 }
 
 .twelve-point-star:before {
-   height: 180px;
-   width: 180px;
+   height: 120px;
+   width: 120px;
    background: orange;
    content:"";
    position: absolute;
@@ -130,8 +136,8 @@ body {
 }
 
 .twelve-point-star:after {
-   height: 180px;
-   width: 180px;
+   height: 120px;
+   width: 120px;
    background: orange;
    content:"";
    position: absolute;
@@ -140,11 +146,11 @@ body {
 
 .award {
    position: absolute;
-   top: 80px;
-   left: 120px;
+   top: 65px;
+   left: 105px;
    font-family: 'Bree Serif', serif;
-   font-size: 30px;
-   width: 90px;
+   font-size: 20px;
+   width: 60px;
    text-align: center;
    font-weight: bold;
    color: #B5070A;
