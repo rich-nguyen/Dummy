@@ -12,7 +12,7 @@ body {
 }
 
 .banner {
-    font-size: 60px;
+    font-size: 70px;
     font-style: normal;
     font-weight: normal;
     color: #B93556;
@@ -23,7 +23,7 @@ body {
     float:right;
     width: 65%;
     margin-top: 50px;
-    margin-bottom: 80px;
+    margin-bottom: 45px;
 }
 
 .at {
@@ -33,10 +33,15 @@ body {
     font-weight: lighter;
 }
 
+.dear{
+    text-align: left;
+    color: #B5070A;
+}
+
 .invite {
     clear: both;
     font-size: 34px;
-    text-align: center;
+    text-align: justify;
     font-weight: bold;
     font-family: 'Bree Serif', serif;
     padding: 10px;
