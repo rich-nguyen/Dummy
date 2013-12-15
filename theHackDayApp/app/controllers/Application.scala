@@ -67,5 +67,9 @@ object Application extends Controller {
     )
   )
 
+  def xmas = Action {
+    Ok(views.html.xmas("An invite"))
+  }
+
   var spaceship = Spaceship("Firefly", 0.0f, 50.0f,List(CrewMember("Rich"),CrewMember("Ben"),CrewMember("Noin")))
 }
