@@ -28,19 +28,24 @@ body {
 
 .at {
     font-family: 'Lily Script One', cursive;
-    color: #B93556;
-    font-size: 30px;
+    color: #34875C;
+    font-size: 40px;
     font-weight: lighter;
 }
 
 .invite {
     clear: both;
-    font-size: 36px;
+    font-size: 34px;
     text-align: center;
     font-weight: bold;
     font-family: 'Bree Serif', serif;
     padding: 10px;
-    color: #B5070A;
+    color: #077DB5;
+}
+
+.diva {
+    color: #077DB5;
+    font-weight: bold;
 }
 
 .hype {
@@ -56,18 +61,35 @@ body {
 
 .details {
     width: 100%;
-    height: 50px;
 }
 
 .details__date, .details__time, .details__location {
     float: left;
     width: 33%;
-    height: 100%;
+    height: 100px;
     box-sizing: border-box;
     text-align: center;
     color: #B5070A;
     font-family: 'Bree Serif', serif;
     font-size: 30px;
+    margin-bottom: 30px;
+}
+
+.details__date .details__item{
+    position: relative;
+    top: 0%;
+    font-family: 'Limelight', cursive;
+    font-size: 40px;
+}
+
+.theatre {
+    font-family: 'Limelight', cursive;
+    color: #B5070A;
+}
+
+.details__location {
+    font-family: 'Limelight', cursive;
+    font-size: 40px;
 }
 
 .details__time {
@@ -81,6 +103,7 @@ body {
     width: 70%;
     border-right: 20px solid transparent;
     margin: 30px auto 30px auto;
+    clear:both;
 }
 
 .twelve-point-star {
