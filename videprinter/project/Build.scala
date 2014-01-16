@@ -1,6 +1,5 @@
 import sbt._
 import Keys._
-import play.Project._
  
 object ApplicationBuild extends Build {
  
@@ -11,6 +10,11 @@ object ApplicationBuild extends Build {
  
   val main = play.Project(
     appName, appVersion, appDependencies
-  ) 
- 
+  ).settings(
+    libraryDependencies ++= Seq(
+      "com.typesafe.akka" %% "akka-agent" % "2.1.0",
+      "org.quartz-scheduler" % "quartz" % "2.2.0",
+      "com.gu" %% "pa-client" % "4.0"
+    )
+  )
 }
