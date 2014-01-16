@@ -1,4 +1,4 @@
-@(title: String, content: Html)
+@(title: String, matches: List[pa.MatchDay], events: List[pa.MatchEvent], content: Html)
 
 <!DOCTYPE html>
 
@@ -13,5 +13,15 @@
         <div>
             @content
         </div>
+        @matches.map { aMatch =>
+            <div>
+                @aMatch.homeTeam.name @aMatch.awayTeam.name
+            </div>
+        }
+        @events.map { event =>
+            <div>
+                @event.eventType
+            </div>
+        }
     </body>
 </html>

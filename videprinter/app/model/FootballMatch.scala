@@ -1,6 +1,5 @@
 package model
 
-case class FootballMatch(
-  val homeScore: Int,
-  val awayScore: Int
-)
+object Competition {
+  val PremierLeague = "100"
+}

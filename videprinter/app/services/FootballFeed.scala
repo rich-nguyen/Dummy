@@ -1,32 +1,69 @@
 package services
 
 import common.{ExecutionContexts, Logging}
-import model.FootballMatch
+import model.{ Competition}
 
-import org.joda.time.DateTime
-import pa.{Http, PaClient, Response}
+import org.joda.time.{DateMidnight, DateTime}
+import pa.{MatchEvent, MatchDay, Http, PaClient}
 import scala.concurrent.Future
-
-case class FootballFeedQuery(
-  date: DateTime
-)
+import play.api.libs.ws.WS
 
 object Client extends PaClient with Http with Logging with ExecutionContexts{
   def apiKey: String = secrets.Secrets.paKey
   override def GET(urlString: String): Future[pa.Response] = {
-    Future(Response(1,"nothing","nothing"))
+    //Future(Response(1,"nothing","nothing"))
+    val promiseOfResponse = WS.url(urlString).withTimeout(2000).get()
+
+    promiseOfResponse.map{ r =>
+
+      //this feed has a funny character at the start of it http://en.wikipedia.org/wiki/Zero-width_non-breaking_space
+      //I have reported to PA, but just trimming here so we can carry on development
+      pa.Response(r.status, r.body.dropWhile(_ != '<'), r.statusText)
+    }
   }
 }
 
-object FootballFeed extends Logging{
-  private val matches = AkkaAgent[List[FootballMatch]](Nil)
+object FootballFeed extends Logging with ExecutionContexts{
+  private val matchDays = AkkaAgent[List[MatchDay]](Nil)
+  private val matchEvents = AkkaAgent[List[MatchEvent]](Nil)
+
+  def matches : List[MatchDay] = matchDays.get()
+  def events : List[MatchEvent] = matchEvents.get()
 
   def update(){
     log.info("grabbing football data")
 
     // Find all the matches for a given date.
+    val date :DateMidnight = /*org.joda.time.DateMidnight.now()*/ DateMidnight.parse("2014-01-11")
+    val newMatches = Client.matchDay(Competition.PremierLeague, date)
+
+    newMatches.map( matchList => {
+      matchDays.send(matchList)
+    })
+
+    // Get all the events from today's matches.
+    val allEvents: Future[List[List[pa.MatchEvent]]] =
+      Future.sequence(
+        matches.map( fMatch => {
+          val futureEvents = Client.matchEvents(fMatch.id)
+
+          futureEvents.map ( events => {
+            val matchEvents: List[pa.MatchEvent] = events.map ( e => {
+              e.events
+            }).getOrElse(Nil)
+
+            matchEvents
+          })
+        })
+      )
+
+    allEvents.map(events =>
+      matchEvents.send(events.flatten)
+    )
+
 
   }
 
   def stop(){}
+
 }
