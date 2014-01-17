@@ -1,0 +1,39 @@
+@(title: String, matches: List[pa.MatchDay], events: List[model.Event])
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>@title</title>
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/videprinter.css")">
+        <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+    </head>
+
+    <body class="console">
+
+            <div class="teams">
+                <div>Current Matches:</div><br>
+                @matches.map { aMatch =>
+                    <div>
+                        @aMatch.homeTeam.name - @aMatch.awayTeam.name
+                    </div>
+                }
+            </div>
+
+            <div class="messages"><span class="cursor">&nbsp;</span></div>
+
+
+    </body>
+
+    <script>
+        curl = {
+            baseUrl: '@routes.Assets.at("javascripts")',
+            apiName: 'require',
+        };
+
+        var script = document.createElement('script');
+        script.async = 'async';
+        script.src = '@routes.Assets.at("javascripts/app.js")';
+        document.getElementsByTagName("head")[0].appendChild(script);
+    </script>
+</html>
