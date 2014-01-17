@@ -53,7 +53,9 @@ object FootballFeed extends Logging with ExecutionContexts{
             }).getOrElse(Nil)
 
             matchEvents.collect {
-              case event:model.Goal => event }
+              case event:model.Goal => event
+              case event:model.Shot => event
+            }
           })
         })
       )

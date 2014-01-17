@@ -10,6 +10,9 @@ require([
     function addLine(event) {
         var $pushedContent = bonzo.create('<span>' + event.data + '</span><br>');
         bonzo($pushedContent).addClass('pushed-content lazyloaded');
+        if (event.type == "goal") {
+            bonzo($pushedContent).addClass('goal');
+        }
         bonzo(qwery(".cursor")).before($pushedContent);
     }
 
@@ -18,8 +21,6 @@ require([
         var chatSocket = new window.WebSocket("ws://localhost:9000/eventStream");
 
         var receiveEvent = function(message) {
-
-            console.log(message)
 
             if (message && 'data' in message) {
                 var events = (JSON.parse(message.data)).events;

@@ -26,7 +26,7 @@ class Event(
   override def toString() = text
 
   def toJson() : JsObject = {
-    JsObject( Seq("id" -> JsString(makeId()), "data" -> JsString(toString())))
+    JsObject( Seq("id" -> JsString(makeId()), "data" -> JsString(toString()), "type" -> JsString(text)))
   }
 }
 
@@ -48,13 +48,26 @@ class Goal(
       s"GOAL!!! ${scoreline} (${scorer} ${matchTime})"
     }
   }
-
 }
+
+class Shot(
+            event : pa.MatchEvent,
+            fMatch : pa.MatchDay
+            ) extends Event(event, fMatch)
+{
+  private val scorer:String = event.players.headOption.map(_.name).getOrElse("Pele")
+
+  override def toString() = {
+    s"${scorer} had a pop at goal! ${matchTime})"
+  }
+}
+
 
 object Event {
   def apply(event: pa.MatchEvent, fMatch: pa.MatchDay): Event = {
     event.eventType match {
       case "timeline" => new Event(event, fMatch)
+      case "shot on target" => new Shot(event, fMatch)
       case "goal" => new Goal(event, fMatch)
       case _ => new Event(event, fMatch)
     }

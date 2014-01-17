@@ -40,6 +40,9 @@ require([
     function addLine(event) {
         var $pushedContent = bonzo.create('<span>' + event.data + '</span><br>');
         bonzo($pushedContent).addClass('pushed-content lazyloaded');
+        if (event.type == "goal") {
+            bonzo($pushedContent).addClass('goal');
+        }
         bonzo(qwery(".cursor")).before($pushedContent);
     }
 
@@ -49,8 +52,6 @@ require([
 
         var receiveEvent = function(message) {
 
-            console.log(message)
-
             if (message && 'data' in message) {
                 var events = (JSON.parse(message.data)).events;
 
@@ -58,7 +59,7 @@ require([
                     var startTime = (index * 4000) + 2000;
                     var endTime = (index * 4000) + 5000;
                     window.setTimeout( function(){addLine(event)},getRandomInt( startTime, endTime ))
-                    
+
                 });
 
                 // For now, just finish.
