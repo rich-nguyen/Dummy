@@ -58,9 +58,11 @@ object FootballFeed extends Logging with ExecutionContexts{
         })
       )
 
-    allEvents.map(events =>
-      matchEvents.send(events.flatten.sortBy(_.eventTime))
-    )
+    allEvents.map(events => {
+      val sortedEvents = events.flatten.sortBy(_.eventTime)
+      matchEvents.send(sortedEvents)
+      services.EventStream.publish(sortedEvents)
+    })
   }
 
   def stop(){}

@@ -1,5 +1,7 @@
 package model
 
+import play.api.libs.json.{JsString, JsArray, JsObject}
+
 object Competition {
   val PremierLeague = "100"
 }
@@ -23,8 +25,8 @@ class Event(
 
   override def toString() = text
 
-  def toJson() = {
-
+  def toJson() : JsObject = {
+    JsObject( Seq("id" -> JsString(makeId()), "data" -> JsString(toString())))
   }
 }
 
