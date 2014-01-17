@@ -25,4 +25,16 @@
                 </div>
             }*@
     </body>
+
+    <script>
+        curl = {
+            baseUrl: '@routes.Assets.at("javascripts")',
+            apiName: 'require',
+        };
+
+        var script = document.createElement('script');
+        script.async = 'async';
+        script.src = '@routes.Assets.at("javascripts/app.js")';
+        document.getElementsByTagName("head")[0].appendChild(script);
+    </script>
 </html>
