@@ -5,6 +5,7 @@
     "grunt": "~0.4.0",
     "grunt-shell": "~0.6",
     "grunt-contrib-requirejs": "~0.4",
-    "grunt-contrib-clean": "~0.5"
+    "grunt-contrib-clean": "~0.5",
+    "grunt-env": "smlgbl/grunt-env"
   }
 }

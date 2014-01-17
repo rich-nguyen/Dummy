@@ -3,22 +3,37 @@ require([
     'bonzo'
 ], function (qwery, bonzo) {
 
+    function getRandomInt(min, max) {
+      return Math.floor(Math.random() * (max - min + 1) + min);
+    }
+
+    function addLine(event) {
+        var $pushedContent = bonzo.create('<span>' + event.data + '</span><br>');
+        bonzo($pushedContent).addClass('pushed-content lazyloaded');
+        bonzo(qwery(".cursor")).before($pushedContent);
+    }
+
     function connect(config) {
 
         var chatSocket = new window.WebSocket("ws://localhost:9000/eventStream");
 
-        var receiveEvent = function(event) {
+        var receiveEvent = function(message) {
 
-            if (event && 'data' in event) {
-                var data = JSON.parse(event.data);
+            console.log(message)
 
-                if (data.error) {
-                    chatSocket.close();
-                } else {
-                    var $pushedContent = bonzo.create('<div>' + data.headline + ' ' + data.url + '</div>');
-                    bonzo($pushedContent).addClass('pushed-content lazyloaded');
-                    common.$g(".monocolumn-wrapper").after($pushedContent);
-                }
+            if (message && 'data' in message) {
+                var events = (JSON.parse(message.data)).events;
+
+                events.forEach(function (event, index) {
+                    var startTime = (index * 4000) + 2000;
+                    var endTime = (index * 4000) + 5000;
+                    window.setTimeout( function(){addLine(event)},getRandomInt( startTime, endTime ))
+
+                });
+
+                // For now, just finish.
+                chatSocket.close();
+
             } else {
                 console.log('Invalid data returned from socket');
             }
@@ -26,7 +41,7 @@ require([
 
         var disconnectEvent = function(event) {
             chatSocket.close();
-            connect(config);
+            //connect(config);
         };
 
         chatSocket.onmessage = receiveEvent;
@@ -34,7 +49,5 @@ require([
         chatSocket.onclose = disconnectEvent;
     }
 
-    return {
-        connect: connect
-    };
+    connect();
 });

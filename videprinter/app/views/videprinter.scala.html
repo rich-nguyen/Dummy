@@ -1,4 +1,4 @@
-@(title: String, matches: List[pa.MatchDay], events: List[model.Event], content: Html)
+@(title: String, matches: List[pa.MatchDay], events: List[model.Event])
 
 <!DOCTYPE html>
 
@@ -10,20 +10,19 @@
     </head>
 
     <body class="console">
-        <div>
-            @content
-        </div>
-            <div>Current Matches:</div>
-            @matches.map { aMatch =>
-                <div>
-                    @aMatch.homeTeam.name - @aMatch.awayTeam.name
-                </div>
-            }
-            @**events.map { event =>
-                <div>
-                    @event.toString()
-                </div>
-            }*@
+
+            <div class="teams">
+                <div>Current Matches:</div><br>
+                @matches.map { aMatch =>
+                    <div>
+                        @aMatch.homeTeam.name - @aMatch.awayTeam.name
+                    </div>
+                }
+            </div>
+
+            <div class="messages"><span class="cursor">&nbsp;</span></div>
+
+
     </body>
 
     <script>
