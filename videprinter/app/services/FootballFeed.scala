@@ -25,10 +25,10 @@ object Client extends PaClient with Http with Logging with ExecutionContexts{
 
 object FootballFeed extends Logging with ExecutionContexts{
   private val matchDays = AkkaAgent[List[MatchDay]](Nil)
-  private val matchEvents = AkkaAgent[List[MatchEvent]](Nil)
+  private val matchEvents = AkkaAgent[List[model.Event]](Nil)
 
   def matches : List[MatchDay] = matchDays.get()
-  def events : List[MatchEvent] = matchEvents.get()
+  def events : List[model.Event] = matchEvents.get()
 
   def update(){
     log.info("grabbing football data")
@@ -42,26 +42,25 @@ object FootballFeed extends Logging with ExecutionContexts{
     })
 
     // Get all the events from today's matches.
-    val allEvents: Future[List[List[pa.MatchEvent]]] =
+    val allEvents: Future[List[List[model.Event]]] =
       Future.sequence(
         matches.map( fMatch => {
           val futureEvents = Client.matchEvents(fMatch.id)
 
           futureEvents.map ( events => {
-            val matchEvents: List[pa.MatchEvent] = events.map ( e => {
-              e.events
+            val matchEvents: List[model.Event] = events.map ( e => {
+              e.events.map(model.Event(_,fMatch))
             }).getOrElse(Nil)
 
-            matchEvents
+            matchEvents.collect {
+              case event:model.Goal => event }
           })
         })
       )
 
     allEvents.map(events =>
-      matchEvents.send(events.flatten)
+      matchEvents.send(events.flatten.sortBy(_.eventTime))
     )
-
-
   }
 
   def stop(){}
