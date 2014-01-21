@@ -18,7 +18,7 @@ require([
 
     function connect(config) {
 
-        var chatSocket = new window.WebSocket("ws://localhost:9000/eventStream");
+        var chatSocket = new window.WebSocket("ws://" + window.location.host + "/eventStream");
 
         var receiveEvent = function(message) {
 
