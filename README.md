@@ -1,16 +1,14 @@
 Dummy
 ========
 
-This is solely for playing with new toys!
-
-The original aim is that it should hold a usable project, composed of the following:
-* IntelliJ IDEA projects, via gen-idea.
-* Scala stuff, 2.10 sugar
-* An sbt project
-* Some sh scripts for common things I used to do in windows.
-* A miniApps project for trying out scala and useful tools. 
+A mixed-bag repo, composed of the following:
+* coursera contains my answers for the first scala coursera course.
+* hipster-blog is a test jekyll static site.
+* nodeApps is a template js node app.
+* theHackDayApp is a space mish controller.
+* videprinter is a football videprinter using PA data.
+* miniApps is a project holder for trying out scala and useful tools. 
 	*OptaFeedMonkey - Curls a URL endpoint to a new file every 5 minutes
-* A nodeApps project for trying out some js apps, with node, grunt and underscore
 
 Should be usable on any *nix system.
 
