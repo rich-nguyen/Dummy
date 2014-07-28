@@ -8,7 +8,7 @@ exports.create = function(configuration)
         for (var i = 0; i < transitions.length; i++) {
             var transition = transitions[i];
             if (transition.from === currentState &&
-               transition.event === event) {
+                transition.event === event) {
                 return transition;
             }
         }
