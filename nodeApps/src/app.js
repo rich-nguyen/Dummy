@@ -1,11 +1,7 @@
 /*
-* Module dependencies.
 * Run "npm install" on this directory to get a node_modules dir,
 * then "node app.js" to run the app.
 */
-
-var moduleA = require("./modules/moduleA");
-moduleA.demoFunc();
 
 var finiteStateMachine = require("./modules/finite-state-machine");
 
@@ -24,8 +20,8 @@ var machine = finiteStateMachine.create({
 	],
 
 	actions: {
-		'trigger A': function(){ console.log('trigger A'); },
-		'trigger B': function(){ console.log('trigger B'); }
+		'trigger A': function(){ console.log('trigger A fired'); },
+		'trigger B': function(){ console.log('trigger B fired'); }
 	}
 });
 
@@ -47,5 +43,28 @@ console.log("Expect invalid event should be state B : " + machine.currentState()
 // Should do something.
 machine.sendEvent("trigger B");
 console.log("Expect valid event should be state A : " + machine.currentState());
+
+// Null machine.
+var nullMachine = finiteStateMachine.create({});
+console.log("Expect empty machine to be empty : " + nullMachine.currentState());
+
+// Self-transition machine.
+var selfieCount = 0;
+var selfie = finiteStateMachine.create({
+	initial: "state A",
+
+	transitions: [
+		{from: "state A", event: "selfie event", to: "state A"}
+	],
+
+	actions: {
+		'selfie event': function(){selfieCount++;}
+	},
+});
+selfie.sendEvent("selfie event");
+selfie.sendEvent("selfie event");
+selfie.sendEvent("selfie event");
+selfie.sendEvent("selfie event");
+console.log("Expect self-transition to work 4 times: " + selfieCount);
 
 console.log("-- end --");
