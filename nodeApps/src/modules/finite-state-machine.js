@@ -16,15 +16,15 @@ exports.create = function(configuration)
     }
 
     return {
-    	currentState: function() { return currentState; },
-    	sendEvent: function(event) {
-    		var transition = findTransition(event);
-    		if (transition) {
-    			currentState = transition.to;
-    			if (transition.event in actions) {
-    				actions[transition.event]();
-    			}
-    		}			
-    	}
+        currentState: function() { return currentState; },
+        sendEvent: function(event) {
+            var transition = findTransition(event);
+            if (transition) {
+                currentState = transition.to;
+                if (transition.event in actions) {
+                    actions[transition.event]();
+                }
+            }			
+        }
     };
 }
