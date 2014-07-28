@@ -3,11 +3,9 @@ Dummy
 
 A mixed-bag repo, composed of the following:
 * coursera contains my answers for the first scala coursera course.
-* hipster-blog is a test jekyll static site.
 * nodeApps is a template js node app.
-* theHackDayApp is a space mish controller.
 * videprinter is a football videprinter using PA data.
-* miniApps is a project holder for trying out scala and useful tools. 
+* scalaApps is a project holder for trying out scala and useful tools. 
 	*OptaFeedMonkey - Curls a URL endpoint to a new file every 5 minutes
 
 Should be usable on any *nix system.
