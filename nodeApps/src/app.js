@@ -3,7 +3,7 @@
 * then "node app.js" to run the app.
 */
 
-var finiteStateMachine = require("./modules/finite-state-machine");
+var FiniteStateMachine = require("./modules/finite-state-machine");
 
 /* State(S) x Event(E) -> Actions (A), State(S')
 *
@@ -11,7 +11,7 @@ var finiteStateMachine = require("./modules/finite-state-machine");
 * If we are in state S and the event E occurs, we should perform the actions A and make a transition to the state S'.
 */
 
-var machine = finiteStateMachine.create({
+var machine = new FiniteStateMachine({
 	initial: "state A",
 
 	transitions: [
@@ -26,31 +26,31 @@ var machine = finiteStateMachine.create({
 });
 
 // Should initially be state A.
-console.log("Expect initial state to be state A : " + machine.currentState());
+console.log("Expect initial state to be state A : " + machine.getCurrentState());
 
 // Should do nothing.
 machine.sendEvent("trigger B");
-console.log("Expect invalid event should be state A : " + machine.currentState());
+console.log("Expect invalid event should be state A : " + machine.getCurrentState());
 
 // Should do something.
 machine.sendEvent("trigger A");
-console.log("Expect valid event should be state B : " + machine.currentState());
+console.log("Expect valid event should be state B : " + machine.getCurrentState());
 
 // Should do nothing.
 machine.sendEvent("trigger A");
-console.log("Expect invalid event should be state B : " + machine.currentState());
+console.log("Expect invalid event should be state B : " + machine.getCurrentState());
 
 // Should do something.
 machine.sendEvent("trigger B");
-console.log("Expect valid event should be state A : " + machine.currentState());
+console.log("Expect valid event should be state A : " + machine.getCurrentState());
 
 // Null machine.
-var nullMachine = finiteStateMachine.create({});
-console.log("Expect empty machine to be empty : " + nullMachine.currentState());
+var nullMachine = new FiniteStateMachine({});
+console.log("Expect empty machine to be empty : " + nullMachine.getCurrentState());
 
 // Self-transition machine.
 var selfieCount = 0;
-var selfie = finiteStateMachine.create({
+var selfie = new FiniteStateMachine({
 	initial: "state A",
 
 	transitions: [
